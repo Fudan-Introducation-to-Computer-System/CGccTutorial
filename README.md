@@ -2,10 +2,46 @@
 > 上节课——CGdbTutorial中，我们又补充了一些C语言的知识，这次，我们再简单讲一下malloc和free。这样整个C语言的主体就出来了，同学们可以根据这个框架，继续深入学习C语言。最近，实验室组里有同学在做C语言的库分析，其中就需要用到我们这门课学的汇编代码内容，比如lea 0x157c0(%rip), %rdi。如果大家要编程，很多东西其实是互通的，这是一门完整互通的科学，你一门课学得好，肯定能让你在相关的其他课程也学得好。 —— 谢东方
 
 ## malloc & free
-### malloc
+C语言中需要手动进行内存的管理，因为调用方法时，方法内部的局部变量放在栈上，如果栈消失了，数据也就消失了。这不是我们想要的结果，为了让数据的生存周期更长，我们使用malloc在堆上分配变量所需的空间。malloc函数放在stdlib.h头文件中，需要我们进行导入。malloc(size_t size)在堆上分配了size大小的空间后，返回它的指针。但是注意，有一个malloc就要有一个free，对空间进行释放。否则，如果程序运行了很久，很多内存没有释放，你的内存就不够用了，造成内存泄漏的情况。下面是一个例子。
 
+```c
+#include <stdio.h>
+#include <stdlib.h>
+struct ListNode* getNodeFromStack();
+struct ListNode* getNodeFromHeap();
 
+struct ListNode {
+    int val;
+    struct ListNode* next;
+};
 
+int main(int argc, char** argv) {
+    struct ListNode* stackNode = getNodeFromStack();
+    struct ListNode* heapNode = getNodeFromHeap();
+    printf("val of node from heap: %d\n", heapNode->val);
+    free(heapNode);
+    printf("val of node from stack: %d\n", stackNode->val);
+    return 0;
+}
+
+struct ListNode* getNodeFromStack() {
+    struct ListNode node;
+    node.val = 10;
+    node.next = NULL;
+    return &node;
+}
+
+struct ListNode* getNodeFromHeap() {
+    struct ListNode* node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    node->val = 20;
+    node->next = NULL;
+    return node;
+}
+
+```
+思考：
+1. gcc编译给了你什么信息，这可能导致什么问题？
+2. 为什么会出现Segmentation fault？
 
 ## GCC
 gcc是C语言的编译器（GNU C Compiler），帮助我们编译C程序。接下来以hello.c为例。参考链接： https://blog.csdn.net/men_wen/article/details/75200430
