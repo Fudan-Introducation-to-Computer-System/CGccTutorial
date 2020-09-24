@@ -43,6 +43,30 @@ struct ListNode* getNodeFromHeap() {
 1. gcc编译给了你什么信息，这可能导致什么问题？
 2. 为什么会出现Segmentation fault？
 
+
+## 函数
+C语言的函数其实和java的差不多，但是C不同的地方在于，你必须提前声明你的函数，才能够使用。比如下面这种情况，无法通过编译，因为编译器不知道hello方法在哪里。
+```
+int main(int argc, char** argv) {
+    hello();
+}
+void hello() {
+
+}
+```
+正确的做法：
+```
+void hello(); // 在最前面放一个函数声明。
+int main(int argc, char** argv) {
+    hello();
+}
+void hello() {
+
+}
+```
+
+
+
 ## GCC
 gcc是C语言的编译器（GNU C Compiler），帮助我们编译C程序。接下来以hello.c为例。参考链接： https://blog.csdn.net/men_wen/article/details/75200430
 
@@ -102,3 +126,4 @@ int main(int argc, char** argv) {
     之后，通过./hello就可以运行了。
 
 
+C语言的基础探索就先到这里了，接下来可能会更注重课本上的知识。
