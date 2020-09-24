@@ -4,7 +4,7 @@
 ## malloc & free
 C语言中需要手动进行内存的管理，因为调用方法时，方法内部的局部变量放在栈上，如果栈消失了，数据也就消失了。这不是我们想要的结果，为了让数据的生存周期更长，我们使用malloc在堆上分配变量所需的空间。malloc函数放在stdlib.h头文件中，需要我们进行导入。malloc(size_t size)在堆上分配了size大小的空间后，返回它的指针。但是注意，有一个malloc就要有一个free，对空间进行释放。否则，如果程序运行了很久，很多内存没有释放，你的内存就不够用了，造成内存泄漏的情况。下面是一个例子。
 
-```c
+```C
 #include <stdio.h>
 #include <stdlib.h>
 struct ListNode* getNodeFromStack();
@@ -46,7 +46,7 @@ struct ListNode* getNodeFromHeap() {
 
 ## 函数
 C语言的函数其实和java的差不多，但是C不同的地方在于，你必须提前声明你的函数，才能够使用。比如下面这种情况，无法通过编译，因为编译器不知道hello方法在哪里。
-```
+```c
 int main(int argc, char** argv) {
     hello();
 }
@@ -55,7 +55,7 @@ void hello() {
 }
 ```
 正确的做法：
-```
+```c
 void hello(); // 在最前面放一个函数声明。
 int main(int argc, char** argv) {
     hello();
@@ -70,7 +70,7 @@ void hello() {
 ## GCC
 gcc是C语言的编译器（GNU C Compiler），帮助我们编译C程序。接下来以hello.c为例。参考链接： https://blog.csdn.net/men_wen/article/details/75200430
 
-```
+```c
 #include <stdio.h>
 int main(int argc, char** argv) {
     printf("hello, c!\n");
