@@ -22,9 +22,9 @@ int main(int argc, char** argv) {
     ```
     gcc hello.c -o hello
     ```
-通过gcc对hello.c进行编译，-o hello指定output文件为hello。
+    通过gcc对hello.c进行编译，-o hello指定output文件为hello。
 
-运行通过以下命令即可。
+    运行通过以下命令即可。
     ```
     ./hello
     ```
